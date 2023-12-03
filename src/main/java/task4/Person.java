@@ -17,6 +17,18 @@ class Person implements Comparable<Person> {
         this.weight = weight;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getBirthYear() {
+        return birthYear;
+    }
+
     public int getHeight() {
         return height;
     }
@@ -25,42 +37,33 @@ class Person implements Comparable<Person> {
         return weight;
     }
 
+    public static void sortByHeightAscending(Set<Person> people) {
+        System.out.println("Sortowanie od najniższej do najwyższej:");
+        people.stream().sorted(Comparator.comparingInt(Person::getHeight)).forEach(System.out::println);
+    }
+
+    public static void sortByWeightDescending(Set<Person> people) {
+        System.out.println("\nSortowanie od najcięższej do najlżejszej:");
+        people.stream().sorted(Comparator.comparingInt(Person::getWeight).reversed()).forEach(System.out::println);
+    }
+
     @Override
     public int compareTo(Person otherPerson) {
-        return Integer.compare(this.birthYear, otherPerson.birthYear);
+        return Integer.compare(otherPerson.birthYear, this.birthYear);
     }
+
+    public static void sortByAgeDefault(Set<Person> people) {
+        List<Person> sortedList = new ArrayList<>(people);
+        sortedList.sort(Comparator.comparingInt(Person::getBirthYear));
+        Collections.reverse(sortedList);
+
+        System.out.println("\nSortowanie od najmłodszej do najstarszej (domyślne):");
+        sortedList.forEach(System.out::println);
+    }
+
 
     @Override
     public String toString() {
         return firstName + " " + lastName + " (Birth Year: " + birthYear + ", Height: " + height + " cm, Weight: " + weight + " kg)";
-    }
-
-
-    private static Set<Person> createPersonSet() {
-        Person person1 = new Person("Anna", "Kowalska", 1990, 165, 60);
-        Person person2 = new Person("John", "Nowak", 1985, 180, 75);
-        Person person3 = new Person("Caroline", "Duda", 1995, 170, 70);
-
-        Set<Person> people = new TreeSet<>();
-        people.add(person1);
-        people.add(person2);
-        people.add(person3);
-
-        return people;
-    }
-
-    private static void sortByHeight(Set<Person> people) {
-        System.out.println("Sorting by height (shortest to tallest):");
-        people.stream().sorted(Comparator.comparingInt(Person::getHeight)).forEach(System.out::println);
-    }
-
-    private static void sortByWeight(Set<Person> people) {
-        System.out.println("\nSorting by weight (heaviest to lightest):");
-        people.stream().sorted(Comparator.comparingInt(Person::getWeight).reversed()).forEach(System.out::println);
-    }
-
-    private static void sortByAgeDefault(Set<Person> people) {
-        System.out.println("\nSorting by age (youngest to oldest - default):");
-        people.forEach(System.out::println);
     }
 }
