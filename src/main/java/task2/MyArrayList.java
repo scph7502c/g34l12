@@ -48,10 +48,17 @@ public class MyArrayList implements OwnList {
     public Integer remove(int index) {
         validateIndex(index);
         Integer removedElement = elements[index];
-        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
-        elements[--size] = null;
+
+        for (int i = index; i < size - 1; i++) {
+            elements[i] = elements[i + 1];
+        }
+
+        elements[size - 1] = null;
+        size--;
+
         return removedElement;
     }
+
 
     private void ensureCapacity() {
         if (size == elements.length) {
