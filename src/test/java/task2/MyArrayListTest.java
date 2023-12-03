@@ -15,7 +15,6 @@ public class MyArrayListTest {
         list = new MyArrayList();
     }
 
-    // Testy
 
     @ParameterizedTest
     @CsvSource({
