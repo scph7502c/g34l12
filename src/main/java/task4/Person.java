@@ -34,16 +34,7 @@ class Person implements Comparable<Person> {
     public String toString() {
         return firstName + " " + lastName + " (Birth Year: " + birthYear + ", Height: " + height + " cm, Weight: " + weight + " kg)";
     }
-//}
-//
-//public class Main {
-//    public static void main(String[] args) {
-//        Set<Person> people = createPersonSet();
-//
-//        sortByHeight(people);
-//        sortByWeight(people);
-//        sortByAgeDefault(people);
-//    }
+
 
     private static Set<Person> createPersonSet() {
         Person person1 = new Person("Anna", "Kowalska", 1990, 165, 60);
